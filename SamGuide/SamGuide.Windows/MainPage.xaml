@@ -35,7 +35,8 @@
         <map:MapView x:Name="MainMap"
                      Credentials="AoJFI0TSbwuS0ZBrkmNA2TS8n2nveDJZgnYN5KpMtIbU6f5U2lWGEMYeR6ebCJxD"
                      Zoom="10"
-                     ShowTraffic="True"/>
+                     ShowTraffic="True"
+                     Location="{Binding Location}"/>
         
         
         

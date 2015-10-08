@@ -2,6 +2,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SamGuide.Helpers;
 using System.Windows.Input;
+using Windows.Devices.Geolocation;
 
 namespace SamGuide.ViewModel
 {
@@ -19,6 +20,7 @@ namespace SamGuide.ViewModel
     /// </summary>
     public class MainPageViewModel : ViewModelBase
     {
+        private BasicGeoposition location = new BasicGeoposition();
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -34,10 +36,14 @@ namespace SamGuide.ViewModel
             ////}
         }
 
-        public string Location
+        public BasicGeoposition Location
         {
-            get;
-            set;
+            get { return location; }
+            set
+            {
+                location = value;
+                RaisePropertyChanged(nameof(Location));
+            }
         }
 
         public ICommand GoToLocation
@@ -46,8 +52,7 @@ namespace SamGuide.ViewModel
             {
                 return new RelayCommand<object>(async (param) =>
                 {
-                    string response = await LocationFinder.GetLocationCoordinates(param.ToString());
-                    string res2 = response;
+                    Location = await LocationFinder.GetLocationCoordinates(param.ToString());                    
                 });
             }
         }

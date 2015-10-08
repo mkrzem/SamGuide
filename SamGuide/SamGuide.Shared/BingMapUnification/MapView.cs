@@ -4,6 +4,8 @@ using Windows.Devices.Geolocation;
 using System.Collections.Generic;
 using Windows.UI;
 using System.Collections.ObjectModel;
+using Windows.UI.Xaml;
+using System;
 
 #if WINDOWS_APP
 using Bing.Maps;
@@ -47,6 +49,29 @@ namespace SamGuide.BingMapUnification
         }
 
         #endregion
+
+        #region Dependency Properties
+
+
+        public BasicGeoposition LocationProperty
+        {
+            get { return (BasicGeoposition)GetValue(LocationPropertyProperty); }
+            set { SetValue(LocationPropertyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for LocationProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LocationPropertyProperty =
+            DependencyProperty.Register("LocationProperty", typeof(BasicGeoposition), typeof(MapView), new PropertyMetadata(null, LocationChanged));
+
+        private static void LocationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            MapView map = d as MapView;
+            map.SetView((BasicGeoposition)e.NewValue, 10.0);
+        }
+
+
+        #endregion
+
         #region Properties
         public string Location
         {
