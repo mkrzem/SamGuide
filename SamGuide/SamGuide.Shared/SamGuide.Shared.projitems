@@ -15,6 +15,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Extensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BingMapUnification\Extensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BingMapUnification\MapView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BingMapUnification\MapViewBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\LocationFinder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\MainPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\ViewModelLocator.cs" />
   </ItemGroup>
 </Project>
