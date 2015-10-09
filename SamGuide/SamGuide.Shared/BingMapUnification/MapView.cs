@@ -13,7 +13,6 @@ using Bing.Maps;
     using Windows.UI.Xaml.Controls.Maps;
     using Windows.UI.Xaml.Media;
     using Windows.UI.Xaml.Shapes;
-    using Windows.UI.Xaml;
 #endif
 
 namespace SamGuide.BingMapUnification
@@ -21,7 +20,7 @@ namespace SamGuide.BingMapUnification
     public class MapView : MapViewBase
     {
 
-        private string location;
+        //private string location;
 #if WINDOWS_APP
         private Map map;
         private MapLayer pinLayer;
@@ -50,41 +49,63 @@ namespace SamGuide.BingMapUnification
 
         #endregion
 
-        #region Dependency Properties
-
-
-        public BasicGeoposition LocationProperty
+        #region Dependency Properties        
+        public bool ShowTraffic
         {
-            get { return (BasicGeoposition)GetValue(LocationPropertyProperty); }
-            set { SetValue(LocationPropertyProperty, value); }
+            get { return (bool)GetValue(ShowTrafficProperty); }
+            set { SetValue(ShowTrafficProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ShowTraffic.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ShowTrafficProperty =
+            DependencyProperty.Register("ShowTraffic", typeof(bool), typeof(MapView), new PropertyMetadata(null, ShowTrafficChanged));
+
+        private static void ShowTrafficChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            MapView view = d as MapView;
+#if WINDOWS_APP
+            if (view.map.ShowTraffic != (bool)e.NewValue)
+            {
+                view.map.ShowTraffic = (bool)e.NewValue;
+            }
+#elif WINDOWS_PHONE_APP            
+            if (view.map.TrafficFlowVisible != (bool)e.NewValue)
+	        {
+		        view.map.TrafficFlowVisible = (bool)e.NewValue; 
+	        }
+#endif
+        }
+
+        public BasicGeoposition Location
+        {
+            get { return (BasicGeoposition)GetValue(LocationProperty); }
+            set { SetValue(LocationProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for LocationProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty LocationPropertyProperty =
-            DependencyProperty.Register("LocationProperty", typeof(BasicGeoposition), typeof(MapView), new PropertyMetadata(null, LocationChanged));
+        public static readonly DependencyProperty LocationProperty =
+            DependencyProperty.Register("Location", typeof(BasicGeoposition), typeof(MapView), new PropertyMetadata(null, LocationChanged));
 
         private static void LocationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            MapView map = d as MapView;
-            map.SetView((BasicGeoposition)e.NewValue, 10.0);
+            MapView view = d as MapView;
+            view.SetView((BasicGeoposition)e.NewValue, 10.0);
         }
-
-
         #endregion
 
-        #region Properties
-        public string Location
-        {
-            get { return location; }
-            set
-            {
-                if (location != value)
-                {
-                    location = value;
-                    RaisePropertyChanged(nameof(Location));
-                }
-            }
-        }
+#region Properties
+        //public string Location
+        //{
+        //    get { return location; }
+        //    set
+        //    {
+        //        if (location != value)
+        //        {
+        //            location = value;
+        //            RaisePropertyChanged(nameof(Location));
+        //        }
+        //    }
+        //}
         public string Credentials
         {
             get
@@ -164,27 +185,27 @@ namespace SamGuide.BingMapUnification
             }
         }
 
-        public bool ShowTraffic
-        {
-            get
-            {
-#if WINDOWS_APP
-                return map.ShowTraffic;
-#elif WINDOWS_PHONE_APP
-                return map.TrafficFlowVisible;
-#endif
-            }
-            set
-            {
-#if WINDOWS_APP
-                map.ShowTraffic = value;
-#elif WINDOWS_PHONE_APP
-                map.TrafficFlowVisible = value;
-#endif
+//        public bool ShowTraffic
+//        {
+//            get
+//            {
+//#if WINDOWS_APP
+//                return map.ShowTraffic;
+//#elif WINDOWS_PHONE_APP
+//                return map.TrafficFlowVisible;
+//#endif
+//            }
+//            set
+//            {
+//#if WINDOWS_APP
+//                map.ShowTraffic = value;
+//#elif WINDOWS_PHONE_APP
+//                map.TrafficFlowVisible = value;
+//#endif
 
-                RaisePropertyChanged(nameof(ShowTraffic));
-            }
-        }
+//                RaisePropertyChanged(nameof(ShowTraffic));
+//            }
+//        }
         #endregion
 
         #region Helper Methods
@@ -296,6 +317,6 @@ namespace SamGuide.BingMapUnification
             map.Children.Clear();
 #endif
         } 
-        #endregion
+#endregion
     }
 }

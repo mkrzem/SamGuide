@@ -12,11 +12,8 @@
     <Page.BottomAppBar>
         <AppBar Visibility="Visible">
             <StackPanel Orientation="Horizontal">
-                <AppBarButton Label="Clear Map">
-                    <AppBarButton.Icon>
-                        <FontIcon Glyph="&#xE107;"/>
-                    </AppBarButton.Icon>
-                </AppBarButton>
+                <AppBarToggleButton Label="Show Traffic" Icon="Clear" Command="{Binding ToggleTraffic}" 
+                                    IsChecked="{Binding ElementName=MainMap, Path=ShowTraffic}"/>
                 <AppBarButton>
                     <AppBarButton.Template>
                         <ControlTemplate>
@@ -35,10 +32,8 @@
         <map:MapView x:Name="MainMap"
                      Credentials="AoJFI0TSbwuS0ZBrkmNA2TS8n2nveDJZgnYN5KpMtIbU6f5U2lWGEMYeR6ebCJxD"
                      Zoom="10"
-                     ShowTraffic="True"
-                     Location="{Binding Location}"/>
-        
-        
-        
+                     ShowTraffic="{Binding ShowTraffic}"
+                     Location="{Binding Location}"
+                     />
     </Grid>    
 </Page>

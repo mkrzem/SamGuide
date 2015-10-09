@@ -19,8 +19,7 @@ namespace SamGuide.ViewModel
     /// </para>
     /// </summary>
     public class MainPageViewModel : ViewModelBase
-    {
-        private BasicGeoposition location = new BasicGeoposition();
+    {        
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -36,6 +35,19 @@ namespace SamGuide.ViewModel
             ////}
         }
 
+        private bool showTraffic;
+        #region Properties
+        public bool ShowTraffic
+        {
+            get { return showTraffic; }
+            set
+            {
+                showTraffic = value;
+                RaisePropertyChanged(nameof(ShowTraffic));
+            }
+        }
+
+        private BasicGeoposition location = new BasicGeoposition();
         public BasicGeoposition Location
         {
             get { return location; }
@@ -45,16 +57,29 @@ namespace SamGuide.ViewModel
                 RaisePropertyChanged(nameof(Location));
             }
         }
+        #endregion
 
+        #region Commands
+        public ICommand ToggleTraffic
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    ShowTraffic = !ShowTraffic;
+                });
+            }
+        }
         public ICommand GoToLocation
         {
             get
             {
                 return new RelayCommand<object>(async (param) =>
                 {
-                    Location = await LocationFinder.GetLocationCoordinates(param.ToString());                    
+                    Location = await LocationFinder.GetLocationCoordinates(param.ToString());
                 });
             }
-        }
+        } 
+        #endregion
     }
 }

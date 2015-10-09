@@ -19,7 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)BingMapUnification\MapView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BingMapUnification\MapViewBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\LocationFinder.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Location.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\OpenLocation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\MainPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\ViewModelLocator.cs" />
   </ItemGroup>

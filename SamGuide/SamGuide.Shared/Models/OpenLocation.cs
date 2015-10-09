@@ -4,11 +4,11 @@ namespace SamGuide.Models
 {
     public class OpenLocation
     {
-        public string place_id { get; set; }
-        public string display_name { get; set; }
-        public List<string> boundingbox { get; set; }
-        public string lat { get; set; }
-        public string lon { get; set; }
+        public string Place_id { get; set; }
+        public string Display_name { get; set; }
+        public List<string> Boundingbox { get; set; }
+        public string Lat { get; set; }
+        public string Lon { get; set; }
     }
 }
 //{"place_id":"127770031",
