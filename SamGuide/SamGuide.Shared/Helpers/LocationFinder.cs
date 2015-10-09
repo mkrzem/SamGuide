@@ -17,7 +17,11 @@ namespace SamGuide.Helpers
     {
         private static string locationApi = @"http://nominatim.openstreetmap.org/search?";
         public async static Task<BasicGeoposition> GetLocationCoordinates(string location)
-        {            
+        {
+            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+            {
+                return new BasicGeoposition();
+            }
             string query = string.Format("q={0}&format=json", location);
             string responseJson;
             BasicGeoposition geoposition = new BasicGeoposition();

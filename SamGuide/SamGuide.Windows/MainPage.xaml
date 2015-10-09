@@ -10,20 +10,22 @@
     DataContext="{Binding Main, Source={StaticResource Locator}}">
 
     <Page.BottomAppBar>
-        <AppBar Visibility="Visible">
-            <StackPanel Orientation="Horizontal">
-                <AppBarToggleButton Label="Show Traffic" Icon="Clear" Command="{Binding ToggleTraffic}" 
-                                    IsChecked="{Binding ElementName=MainMap, Path=ShowTraffic}"/>
+        <AppBar >
+            <StackPanel Orientation="Horizontal" >                
                 <AppBarButton>
                     <AppBarButton.Template>
                         <ControlTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBox x:Name="locationName" PlaceholderText="Location"></TextBox>
+                                <TextBox x:Name="locationName" PlaceholderText="Location" 
+                                         VerticalAlignment="Center" Height="Auto"
+                                         Width="180"/>
                                 <AppBarButton Icon="Find" Label ="Szukaj" Command="{Binding GoToLocation}" CommandParameter="{Binding ElementName=locationName, Path=Text}"/>
                             </StackPanel>
                         </ControlTemplate>
                     </AppBarButton.Template>
                 </AppBarButton>
+                <AppBarToggleButton Label="Show Traffic" Icon="Clear" Command="{Binding ToggleTraffic}" 
+                                    IsChecked="{Binding ElementName=MainMap, Path=ShowTraffic}"/>
             </StackPanel>
         </AppBar>
     </Page.BottomAppBar>

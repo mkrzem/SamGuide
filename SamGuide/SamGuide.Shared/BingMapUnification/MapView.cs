@@ -88,8 +88,11 @@ namespace SamGuide.BingMapUnification
 
         private static void LocationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            MapView view = d as MapView;
-            view.SetView((BasicGeoposition)e.NewValue, 10.0);
+            if (!Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+            {
+                MapView view = d as MapView;
+                view.SetView((BasicGeoposition)e.NewValue, 10.0);
+            }
         }
         #endregion
 
