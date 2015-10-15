@@ -12,19 +12,22 @@
     <Page.BottomAppBar>
         <AppBar >
             <StackPanel Orientation="Horizontal" >                
-                <AppBarButton>
+                <AppBarButton x:Uid="test">
                     <AppBarButton.Template>
                         <ControlTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <TextBox x:Name="locationName" PlaceholderText="Location" 
                                          VerticalAlignment="Center" Height="Auto"
                                          Width="180"/>
-                                <AppBarButton Icon="Find" Label ="Szukaj" Command="{Binding GoToLocation}" CommandParameter="{Binding ElementName=locationName, Path=Text}"/>
+                                <AppBarButton x:Uid="searchButton" Icon="Find" Label="Go To"
+                                              Command="{Binding GoToLocation}"
+                                              CommandParameter="{Binding ElementName=locationName, Path=Text}"/>
                             </StackPanel>
                         </ControlTemplate>
                     </AppBarButton.Template>
                 </AppBarButton>
-                <AppBarToggleButton Label="Show Traffic" Icon="Clear" Command="{Binding ToggleTraffic}" 
+                <AppBarToggleButton x:Uid="trafficButton" Label="Show Traffic" Icon="MapDrive" 
+                                    Command="{Binding ToggleTraffic}" 
                                     IsChecked="{Binding ElementName=MainMap, Path=ShowTraffic}"/>
             </StackPanel>
         </AppBar>

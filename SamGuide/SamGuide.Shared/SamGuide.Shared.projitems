@@ -23,4 +23,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\MainPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\ViewModelLocator.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="$(MSBuildThisFileDirectory)Localization\en-US\Resources.resw" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)Localization\pl-PL\Resources.resw" />
+  </ItemGroup>
 </Project>
